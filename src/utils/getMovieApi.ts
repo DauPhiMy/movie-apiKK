@@ -4,7 +4,7 @@ export const linkImg = "https://img.phimapi.com/";
 
 export const getMovieList = async (
   movieList: string | undefined,
-  limit= 20,
+  limit = 20,
 ) => {
   const { data } = await axios.get(
     `/v1/api/danh-sach/${movieList}?limit=${limit}`,
@@ -35,6 +35,10 @@ export const getNewlyUpdatedMovie = async () => {
 export const getMovieInfo = async (name: string | undefined) => {
   const { data } = await axios.get(`/phim/${name}`);
   return data;
+};
+export const getGenres = async (genre: string | undefined) => {
+  const { data } = await axios.get(`v1/api/the-loai/${genre}`);
+  return data.data.items;
 };
 export const searchMovie = async (name: string | undefined, limit = 10) => {
   const { data } = await axios.get(

@@ -23,6 +23,7 @@ export default function Search() {
           keyword: searchValue,
         },
       });
+      setSearchValue('')
     }
   };
   useEffect(() => {
@@ -80,6 +81,7 @@ export default function Search() {
                   to={`/info/${item.slug}`}
                   key={item.poster_url}
                   className="flex border-b-[1px] border-black p-2 hover:cursor-pointer"
+                  onClick={() => setSearchValue('')}
                 >
                   <div className="size-[50px] overflow-hidden">
                     <img
