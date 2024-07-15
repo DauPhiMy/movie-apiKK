@@ -1,13 +1,16 @@
 import { useDebounce } from "@/hook/useDebounce";
 import { linkImg, searchMovie } from "@/utils/getMovieApi";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
 import { MovieType } from "@/types/movie";
 
-export default function Search() {
+interface SearchType {
+  setIsSearch?: Dispatch<SetStateAction<boolean>>;
+}
+export default function Search({ setIsSearch }: SearchType) {
   const [movie, setMovie] = useState<MovieType[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const searchQuery = useDebounce(searchValue);
@@ -18,21 +21,29 @@ export default function Search() {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchValue) {
-      navigate(`/search?keyword=${searchValue}`, {
-        state: {
-          keyword: searchValue,
-        },
-      });
-      setSearchValue('')
+      navigate(`/search?keyword=${searchValue}`);
+      setSearchValue("");
+      if (setIsSearch) setIsSearch(false);
     }
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (!value.startsWith(" ")) {
+      setSearchValue(e.target.value);
+    }
+  };
+
   useEffect(() => {
     if (!searchQuery.trim()) {
+      setMovie([]);
       return;
     }
+
     setIsLoading(true);
     searchMovie(encodeURIComponent(searchQuery)).then((res) => {
-      setMovie(res.data.items);
+      console.log(res);
+      setMovie(res.items);
       setIsLoading(false);
     });
   }, [searchQuery]);
@@ -44,7 +55,7 @@ export default function Search() {
         className="h-8 w-full grow rounded-lg pl-2 outline-none
                  ring-1 ring-blue-500 focus:ring-blue-950"
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={handleChange}
         ref={inputRef}
       />
       <button className="absolute right-1 top-[20%]">
@@ -52,7 +63,7 @@ export default function Search() {
       </button>
 
       {searchValue && !isLoading && (
-        <button
+        <div
           className="absolute right-10 top-[30%] hover:cursor-pointer"
           onClick={() => {
             setSearchValue("");
@@ -62,18 +73,15 @@ export default function Search() {
           }}
         >
           <IoIosCloseCircle className="size-4" />
-        </button>
+        </div>
       )}
       {isLoading && (
-        <button className="absolute right-10 top-[30%]">
+        <div className="absolute right-10 top-[30%]">
           <FaSpinner className="size-3 animate-spin" />
-        </button>
+        </div>
       )}
       {searchValue && (
-        <div className="absolute left-0 top-10 w-full rounded-lg bg-slate-500">
-          <Link to="/search/a" className="mt-1 pl-2">
-            Đến trang tìm kiếm
-          </Link>
+        <div className="absolute left-0 top-10 max-h-[400px] w-full overflow-auto rounded-lg bg-slate-500">
           <div>
             {movie?.map((item) => {
               return (
@@ -81,7 +89,10 @@ export default function Search() {
                   to={`/info/${item.slug}`}
                   key={item.poster_url}
                   className="flex border-b-[1px] border-black p-2 hover:cursor-pointer"
-                  onClick={() => setSearchValue('')}
+                  onClick={() => {
+                    setSearchValue("");
+                    if (setIsSearch) setIsSearch(false);
+                  }}
                 >
                   <div className="size-[50px] overflow-hidden">
                     <img

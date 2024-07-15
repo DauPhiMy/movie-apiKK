@@ -13,6 +13,7 @@ export interface MovieType {
   status: string;
   quality: string;
   trailer_url: string;
+  episode_current: string;
 }
 
 export interface EpisodesType {

@@ -4,6 +4,7 @@ import { MovieType } from "../../types/movie";
 import { Link } from "react-router-dom";
 import PrevArrow from "./PrevArrow";
 import NextArrow from "./NextArrow";
+import { FaPlay } from "react-icons/fa";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -37,9 +38,10 @@ export default function SliderHome() {
                 <div className="flex items-center space-x-2">
                   <Link
                     to={`info/${slug}`}
-                    className="z-10 rounded-md bg-red-600 px-4 py-2 text-white "
+                    className="z-10 rounded-md bg-red-600 px-4 py-2 text-white flex items-center gap-x-2 "
                   >
-                    Xem ngay
+                    <FaPlay />
+                    <div>Xem ngay</div>
                   </Link>
                   <div className="z-10 rounded-md bg-blue-400 px-4 py-2 text-white ">
                     {year}

@@ -9,7 +9,7 @@ export default function WatchMoviePage() {
   const [episodes, setEpisodes] = useState<number>(0);
   useEffect(() => {
     getMovieInfo(movieId).then((res) => {
-      console.log(res.episodes);
+      console.log(res);
       setMovie(res.episodes);
     });
   }, [movieId]);
@@ -20,7 +20,7 @@ export default function WatchMoviePage() {
   console.log(srcMovie);
   return (
     <div>
-      <div className="w-[80%]]">
+      <div>
         {srcMovie && (
           <iframe
             src={srcMovie}
@@ -30,7 +30,7 @@ export default function WatchMoviePage() {
         )}
       </div>
       <div className="bg-slate-600 p-2">
-        <div>Danh sach tap</div>
+        <div className="font-medium pb-2">Danh sách tập</div>
         <div className="grid max-h-32 grid-cols-4 gap-1 overflow-auto sm:grid-cols-5 md:grid-cols-8 lg:grid-cols-12">
           {movie[0]?.server_data.map((item, index) => {
             return (

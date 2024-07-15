@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 :root {
   --header: 186.20000000000005, 93.5%, 81.8%;
@@ -12,4 +11,36 @@
 .dark {
   --header: 0, 0%, 14.9%;
   --header-foreground: 210, 40%, 98%;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+  border-radius: 3px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 5px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.boder-title {
+  border: 14px solid;
+  border-color: transparent transparent transparent #000;
+}
+
+.container-main {
+  @apply mx-auto w-full max-w-[1200px];
+}
+
+@layer base {
+  .pagination-item {
+    @apply rounded-md bg-blue-200 px-3 py-1 hover:bg-blue-500;
+  }
 }
