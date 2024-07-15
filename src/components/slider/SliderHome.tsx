@@ -13,7 +13,7 @@ import Slider from "react-slick";
 export default function SliderHome() {
   const [movie, setMovie] = useState<MovieType[]>([]);
   useEffect(() => {
-    getNewlyUpdatedMovie().then((res) => setMovie(res.items));
+    getNewlyUpdatedMovie().then((res) => setMovie(res.data.items));
   }, []);
   const settings = {
     infinite: true,
