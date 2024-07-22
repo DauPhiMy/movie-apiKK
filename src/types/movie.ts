@@ -14,6 +14,9 @@ export interface MovieType {
   quality: string;
   trailer_url: string;
   episode_current: string;
+  episode_total:string;
+  content: string;
+  lang:string;
 }
 
 export interface EpisodesType {

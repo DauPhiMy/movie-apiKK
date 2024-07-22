@@ -21,10 +21,12 @@
     "noFallthroughCasesInSwitch": true,
 
     // absolute path
-    "baseUrl": "./src",
-        "paths": {
-            "@/*": ["*"]
-        }
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

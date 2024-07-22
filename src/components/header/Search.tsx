@@ -1,16 +1,16 @@
 import { useDebounce } from "@/hook/useDebounce";
 import { linkImg, searchMovie } from "@/utils/getMovieApi";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
 import { MovieType } from "@/types/movie";
 
-interface SearchType {
-  setIsSearch?: Dispatch<SetStateAction<boolean>>;
+interface SearchProps {
+  handleCloseMenu?: () => void;
 }
-export default function Search({ setIsSearch }: SearchType) {
+export default function Search({ handleCloseMenu }: SearchProps) {
   const [movie, setMovie] = useState<MovieType[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const searchQuery = useDebounce(searchValue);
@@ -23,8 +23,8 @@ export default function Search({ setIsSearch }: SearchType) {
     if (searchValue) {
       navigate(`/search?keyword=${searchValue}`);
       setSearchValue("");
-      if (setIsSearch) setIsSearch(false);
     }
+    if (handleCloseMenu) handleCloseMenu();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +48,12 @@ export default function Search({ setIsSearch }: SearchType) {
     });
   }, [searchQuery]);
   return (
-    <form className="relative mx-4 -ml-2 w-full" onSubmit={handleSearch}>
+    <form className="relative w-full" onSubmit={handleSearch}>
       <input
         type="text"
         placeholder="Tìm kiếm phim"
-        className="h-8 w-full grow rounded-lg pl-2 outline-none
-                 ring-1 ring-blue-500 focus:ring-blue-950"
+        className="h-8 w-full grow rounded-lg  pl-2
+                 outline-none ring-1 ring-blue-500 focus:ring-blue-950"
         value={searchValue}
         onChange={handleChange}
         ref={inputRef}
@@ -81,7 +81,7 @@ export default function Search({ setIsSearch }: SearchType) {
         </div>
       )}
       {searchValue && (
-        <div className="absolute left-0 top-10 max-h-[400px] w-full overflow-auto rounded-lg bg-slate-500">
+        <div className="absolute left-0 top-10 max-h-[400px] w-full overflow-auto rounded-lg bg-blue-200">
           <div>
             {movie?.map((item) => {
               return (
@@ -91,7 +91,6 @@ export default function Search({ setIsSearch }: SearchType) {
                   className="flex border-b-[1px] border-black p-2 hover:cursor-pointer"
                   onClick={() => {
                     setSearchValue("");
-                    if (setIsSearch) setIsSearch(false);
                   }}
                 >
                   <div className="size-[50px] overflow-hidden">

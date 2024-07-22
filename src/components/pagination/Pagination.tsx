@@ -8,13 +8,20 @@ interface PaginationType {
 }
 
 export default function Pagination({ totalPage, currentPage }: PaginationType) {
-  console.log(currentPage);
   return (
     <div className="flex gap-4">
       {currentPage > 1 && (
         <Link to={`?page=${currentPage - 1}`} className="pagination-item">
           Prev
         </Link>
+      )}
+      {currentPage >= 3 && (
+        <div className="flex gap-4">
+          <Link to={`?page=1`} className="pagination-item">
+            1
+          </Link>
+          <div>...</div>
+        </div>
       )}
       <div className="flex gap-4">
         <Link
@@ -29,16 +36,19 @@ export default function Pagination({ totalPage, currentPage }: PaginationType) {
           </Link>
         )}
         {currentPage + 2 <= totalPage && (
-          <Link to={`?page=${currentPage + 1}`} className="pagination-item">
+          <Link to={`?page=${currentPage + 2}`} className="pagination-item">
             {currentPage + 2}
           </Link>
         )}
-        {currentPage <= totalPage - 3 && (
+      </div>
+      {currentPage <= totalPage - 3 && (
+        <div className="flex gap-4">
+          <div className="">...</div>
           <Link to={`?page=${totalPage}`} className="pagination-item">
             {totalPage}
           </Link>
-        )}
-      </div>
+        </div>
+      )}
       {currentPage <= totalPage && (
         <Link to={`?page=${currentPage + 1}`} className="pagination-item">
           Next

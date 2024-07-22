@@ -3,16 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --header: 186.20000000000005, 93.5%, 81.8%;
-  --header-foreground: 228.60000000000002, 84%, 4.9%;
-}
-
-.dark {
-  --header: 0, 0%, 14.9%;
-  --header-foreground: 210, 40%, 98%;
-}
-
 ::-webkit-scrollbar {
   width: 6px;
 }

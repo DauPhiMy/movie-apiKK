@@ -1,4 +1,3 @@
-import SliderHome from "../../components/slider/SliderHome";
 import {
   getAnime,
   getFeatureFilm,
@@ -6,11 +5,12 @@ import {
   getTvShow,
 } from "@/utils/getMovieApi";
 import HomeMovieList from "@/pages/HomePage/HomeMovieList";
+import Slider from "./Slider";
 
 export default function HomePage() {
   return (
     <div>
-      <SliderHome />
+      <Slider />
       <HomeMovieList
         title="Phim Lẻ"
         slug="list/phim-le"
