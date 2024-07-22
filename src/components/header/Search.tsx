@@ -91,16 +91,17 @@ export default function Search({ handleCloseMenu }: SearchProps) {
                   className="flex border-b-[1px] border-black p-2 hover:cursor-pointer"
                   onClick={() => {
                     setSearchValue("");
+                    if (handleCloseMenu) handleCloseMenu();
                   }}
                 >
-                  <div className="size-[50px] overflow-hidden">
+                  <div className="size-[50px] overflow-hidden shrink-0">
                     <img
                       src={`${linkImg}${item.poster_url}`}
                       alt={item.name}
                       className="size-full object-cover"
                     />
                   </div>
-                  <div className="pl-4 font-bold">{item.name}</div>
+                  <div className="pl-2 md:pl-4 font-bold line-clamp-2 text-sm md:text-base">{item.name}</div>
                 </Link>
               );
             })}
