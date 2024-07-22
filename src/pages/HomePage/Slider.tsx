@@ -35,8 +35,11 @@ export default function Slider() {
             <CarouselItem key={item.thumb_url}>
               <div className=" relative aspect-[2/1] w-full md:aspect-[3/1]">
                 <img src={item.thumb_url} className="h-full w-full" />
-                <div className="absolute bottom-6 left-6">
-                  <h1 className="mb-2 text-xl md:text-2xl font-bold text-white">
+                <div className="absolute bottom-6 left-14 md:left-6">
+                  <h1
+                    className="mb-2 text-lg md:text-2xl font-bold text-white"
+                    style={{ textShadow: "0px 2px 1px black" }}
+                  >
                     {item.name}
                   </h1>
                   <div className="flex items-center space-x-2">
@@ -55,9 +58,9 @@ export default function Slider() {
               </div>
             </CarouselItem>
           ))}
-        </CarouselContent >
-        <CarouselPrevious className="left-5 dark:bg-gray-400" />
-        <CarouselNext  className="right-5 dark:bg-gray-400" />
+        </CarouselContent>
+        <CarouselPrevious className="left-2 dark:bg-gray-400 md:left-5" />
+        <CarouselNext className="right-2 dark:bg-gray-400 md:left-5" />
       </Carousel>
     </div>
   );

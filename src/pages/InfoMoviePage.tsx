@@ -32,7 +32,7 @@ export default function InfoMoviePage() {
           className="size-full object-cover"
         />
         <div className="absolute left-5 top-[50%] md:top-[70%]">
-          <div className="mb-3 text-sm md:text-2xl font-bold uppercase text-white">
+          <div className="mb-3 text-sm md:text-2xl font-bold uppercase text-white" style={{textShadow: '0px 2px 1px black'}}>
             {movie?.name}
           </div>
           <Link to={`/watching/${movie?.slug}`}>
