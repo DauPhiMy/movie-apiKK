@@ -49,7 +49,7 @@ export default function Pagination({ totalPage, currentPage }: PaginationType) {
           </Link>
         </div>
       )}
-      {currentPage <= totalPage && (
+      {currentPage <= totalPage && totalPage > 1 && (
         <Link to={`?page=${currentPage + 1}`} className="pagination-item">
           Next
         </Link>
