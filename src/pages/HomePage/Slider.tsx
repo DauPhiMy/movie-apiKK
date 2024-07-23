@@ -60,7 +60,7 @@ export default function Slider() {
           ))}
         </CarouselContent>
         <CarouselPrevious className="left-2 dark:bg-gray-400 md:left-5" />
-        <CarouselNext className="right-2 dark:bg-gray-400 md:left-5" />
+        <CarouselNext className="right-2 dark:bg-gray-400 md:right-5" />
       </Carousel>
     </div>
   );
