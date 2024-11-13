@@ -9,29 +9,29 @@ import { useParams } from "react-router-dom";
 
 export default function MovieListPage() {
   const { slug } = useParams();
-  const [movie, setMovie] = useState<MovieData>();
+  const [movies, setMovies] = useState<MovieData>();
   const { page = 1 } = useSearchParamsCustom();
   useEffect(() => {
     if (slug) {
       getMovieList(slug, page).then((res) => {
-        setMovie(res);
+        setMovies(res);
       });
     }
   }, [slug, page]);
-  const totalPage = movie?.data?.params.pagination.totalPages || 1;
-  const currentPage = movie?.data?.params.pagination.currentPage || 1;
+  const totalPage = movies?.data?.params.pagination.totalPages || 1;
+  const currentPage = movies?.data?.params.pagination.currentPage || 1;
   return (
     <div className="pt-3">
-      <div className="pb-2 text-xl font-bold ">{movie?.data?.titlePage}</div>
+      <div className="pb-2 text-xl font-bold ">{movies?.data?.titlePage}</div>
       <div className="flex items-center gap-x-2 pb-2">
         <div className="flex items-center gap-1">
           <FaHome className="" />
-          <div className="">{movie?.data?.breadCrumb[0].name}</div>
+          <div className="">{movies?.data?.breadCrumb[0].name}</div>
         </div>
         <div className="">/</div>
-        <div className="">{movie?.data?.breadCrumb[1].name}</div>
+        <div className="">{movies?.data?.breadCrumb[1].name}</div>
       </div>
-      <MovieList movie={movie?.data?.items} />
+      <MovieList movies={movies?.data?.items} />
       <div className="flex justify-center py-4">
         <Pagination totalPage={totalPage} currentPage={currentPage} />
       </div>

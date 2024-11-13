@@ -17,7 +17,6 @@ export default function Slider() {
   useEffect(() => {
     getNewlyUpdatedMovie().then((res) => setMovie(res.items));
   }, []);
-  console.log(movie);
   return (
     <div>
       <Carousel
